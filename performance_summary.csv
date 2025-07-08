@@ -1,0 +1,5 @@
+Metric,Unit,Proposed_System_Value,Baseline_ORB_SLAM3_Value,Improvement
+Localization Accuracy,m,0.25,0.42,40% ↑
+Energy Consumption,J/m,0.8,1.5,47% ↓
+Obstacle Avoidance,% success,90.0,65.0,38% ↑
+Visual Occlusion Recovery,s,1.2,3.0,60% faster
