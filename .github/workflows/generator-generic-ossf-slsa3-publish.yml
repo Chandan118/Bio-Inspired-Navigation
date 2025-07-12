@@ -45,7 +45,19 @@ jobs:
       actions: read   # To read the workflow path.
       id-token: write # To sign the provenance.
       contents: write # To add assets to a release.
+    # Using the latest stable version of the third-party action
     uses: slsa-framework/slsa-github-generator/.github/workflows/generator_generic_slsa3.yml@v1.4.0
     with:
       base64-subjects: "${{ needs.build.outputs.digests }}"
       upload-assets: true # Optional: Upload to a new release
+
+  # Optional: Upload artifacts step (with updated version)
+  upload_artifacts:
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Upload artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifacts
+          path: artifact1, artifact2
