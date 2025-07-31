@@ -1,0 +1,180 @@
+# Full Pipeline Configuration for AutoOpticalDiagnostics
+# This file configures the complete pipeline from data generation to evaluation
+
+# Data Generation Configuration
+data_generation:
+  # Dataset parameters
+  num_train_samples: 5000
+  num_val_samples: 1000
+  image_size: [512, 512]
+  random_seed: 42
+  
+  # LSCI parameters
+  lsci_wavelength: 785.0
+  lsci_coherence_length: 50.0
+  lsci_speckle_size: 2.0
+  lsci_contrast_range: [0.1, 0.8]
+  
+  # OCT parameters
+  oct_center_wavelength: 1300.0
+  oct_bandwidth: 100.0
+  oct_axial_resolution: 5.0
+  oct_lateral_resolution: 10.0
+  oct_depth_range: 2000.0
+  
+  # Defect parameters
+  defect_probability: 0.3
+  defect_size_range: [0.05, 0.2]
+  defect_intensity_range: [0.2, 0.8]
+  
+  # Noise parameters
+  thermal_noise_std: 0.05
+  motion_blur_probability: 0.1
+  motion_blur_kernel_size: 15
+  gaussian_noise_std: 0.02
+  salt_pepper_probability: 0.01
+
+# Model Configuration
+model:
+  # Model architecture
+  model_type: "unet"
+  input_channels: 3
+  output_channels: 1
+  initial_features: 64
+  depth: 5
+  dropout_rate: 0.2
+  batch_norm: true
+  
+  # Training parameters
+  batch_size: 8
+  learning_rate: 1e-4
+  weight_decay: 1e-5
+  num_epochs: 100
+  early_stopping_patience: 15
+  lr_scheduler_patience: 10
+  lr_scheduler_factor: 0.5
+  
+  # Loss function
+  loss_type: "dice_bce"
+  dice_weight: 0.5
+  bce_weight: 0.5
+  focal_alpha: 0.25
+  focal_gamma: 2.0
+  
+  # Data augmentation
+  augmentation_probability: 0.8
+  rotation_range: [-30, 30]
+  scale_range: [0.8, 1.2]
+  brightness_range: [0.8, 1.2]
+  contrast_range: [0.8, 1.2]
+  horizontal_flip: true
+  vertical_flip: false
+
+# Training Configuration
+training:
+  # Device and optimization
+  device: "auto"
+  num_workers: 4
+  pin_memory: true
+  use_amp: true
+  gradient_clipping: true
+  gradient_clip_value: 1.0
+  
+  # Logging and checkpointing
+  log_interval: 10
+  save_interval: 5
+  eval_interval: 1
+  tensorboard_logging: true
+  wandb_logging: false
+  wandb_project: "auto-optical-diagnostics"
+  save_best_only: true
+  save_last_checkpoint: true
+  max_checkpoints: 5
+  
+  # Validation
+  val_split: 0.2
+  cross_validation_folds: 5
+
+# Evaluation Configuration
+evaluation:
+  # Evaluation parameters
+  batch_size: 8
+  num_workers: 4
+  device: "auto"
+  threshold: 0.5
+  threshold_range: [0.1, 0.9]
+  threshold_steps: 50
+  
+  # Output settings
+  save_predictions: true
+  save_attention_maps: true
+  save_gradcam: true
+  num_visualization_samples: 20
+  
+  # Statistical analysis
+  confidence_intervals: [0.95, 0.99]
+  bootstrap_samples: 1000
+  
+  # Metrics to compute
+  metrics:
+    - "dice_score"
+    - "iou"
+    - "precision"
+    - "recall"
+    - "f1_score"
+    - "hausdorff_distance"
+    - "surface_dice"
+    - "psnr"
+    - "ssim"
+
+# Data Configuration
+data:
+  # Data paths
+  train_images_dir: "data/synthetic/train/images"
+  train_masks_dir: "data/synthetic/train/masks"
+  val_images_dir: "data/synthetic/val/images"
+  val_masks_dir: "data/synthetic/val/masks"
+  
+  # Data processing
+  image_size: [512, 512]
+  normalization: "imagenet"
+  custom_mean: [0.485, 0.456, 0.406]
+  custom_std: [0.229, 0.224, 0.225]
+
+# Output Configuration
+output:
+  # Output directories
+  results_dir: "outputs/evaluation_results"
+  visualizations_dir: "outputs/visualizations"
+  reports_dir: "outputs/reports"
+  checkpoints_dir: "outputs/checkpoints"
+  logs_dir: "outputs/logs"
+  
+  # File formats
+  save_format: "png"
+  dpi: 300
+  
+  # Visualization settings
+  colormap: "viridis"
+  overlay_alpha: 0.7
+
+# Pipeline Configuration
+pipeline:
+  # Execution order
+  steps:
+    - "generate_data"
+    - "train_model"
+    - "evaluate_model"
+  
+  # Parallel execution
+  parallel_data_generation: false
+  parallel_training: false
+  
+  # Resource management
+  max_memory_usage: "8GB"
+  max_cpu_usage: 0.8
+  
+  # Error handling
+  continue_on_error: false
+  retry_failed_steps: true
+  max_retries: 3
