@@ -1,35 +1,43 @@
-"""
-Bio Inspired Navigation  Reproducible Data Generator (Data S1)
+# AutoOpticalDiagnostics
 
-This project contains the complete codebase to reproducibly generate all datasets and key figures for the supplemental file `Data S1`.
+AutoOpticalDiagnostics is an end-to-end, physics-informed pipeline for automatic surface-defect detection using synthetic optical data.
 
-Overview
+The project reproduces the main contributions from the accompanying research paper:
 
-The purpose of this project is to provide a transparent and robust method for recreating the core experimental data presented in the paper. It generates three primary datasets and two corresponding visualizations.
+1. **Physics-Based Simulation** – We synthesise Optical Coherence Tomography (OCT) and Laser Speckle Contrast Imaging (LSCI) frames together with perfect ground-truth masks.
+2. **Industrial Realism** – The generator injects thermal noise and motion-blur artefacts to emulate hostile factory environments (see paper Table 10).
+3. **AI-Driven Inspection** – A lightweight U-Net is trained on the synthetic data to segment defects.
+4. **Evaluation & Reporting** – Integrated scripts benchmark the model (Dice, IoU, PR curves) and emit a markdown/text report + sample visualisations.
+5. **Modular & Professional Codebase** – Every concern lives in its own module, all configurable via `src/config.py` and orchestrated from `main.py`.
 
-Features
+## Project Layout
+```text
+AutoOpticalDiagnostics/
+├── data/                # Synthetic dataset appears here after generation
+├── models/              # Trained weights
+├── outputs/             # Evaluation reports + plots
+├── src/                 # Source code (simulation, training, evaluation)
+├── main.py              # One-click pipeline entry-point
+├── requirements.txt     # Python dependencies
+└── README.md            # You are here
+```
 
-- Sophisticated Data Simulation: Trajectory data includes a periodic error correction model to more accurately simulate the proposed framework.
-- High-Quality Plot Generation: Automatically creates PNG files for Figure 13 (Localization Accuracy) and Figure 15B (Energy Consumption).
-- Structured Codebase: Organized as a proper Python package for clarity and maintainability.
-- Command-Line Interface: Provides flexible control over data and plot generation.
-- Clean Data Ouput: All data is saved in the standard, easy-to-use CSV format.
+## Quick-Start
+```bash
+# 1. Setup environment
+python -m venv .venv && source .venv/bin/activate
+pip install -r requirements.txt
 
-How to Use
+# 2. Run full pipeline (generate ➔ train ➔ evaluate)
+python main.py --run_all
 
-Prerequisites
+# 3. Explore results
+open outputs/evaluation_results/report.txt  # dice/IoU metrics
+open outputs/evaluation_results/sample_prediction.png
+```
 
-You must have Python 3 installed, along with the following libraries:
-- pandas
-- numpy
-- matplotlib
-- seaborn
+## Customisation
+Adjust any hyper-parameters, dataset sizes, or noise characteristics in `src/config.py`.
 
-You can install them via pip:
-pip install pandas numpy matplotlib seaborn
-"""
-
-# ...  actual Python code would go here ...
-# For example:
-# import pandas as pd
-# print("Ready to generate data.")
+## Licence
+MIT
