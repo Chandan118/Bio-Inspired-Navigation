@@ -1,0 +1,74 @@
+# Training Configuration for AutoOpticalDiagnostics
+# This file configures the model training process
+
+model:
+  # Model architecture
+  model_type: "unet"  # Options: "unet", "unet_plus_plus", "attention_unet", "deep_supervision_unet"
+  input_channels: 3
+  output_channels: 1
+  initial_features: 64
+  depth: 5
+  dropout_rate: 0.2
+  batch_norm: true
+  
+  # Training parameters
+  batch_size: 8
+  learning_rate: 1e-4
+  weight_decay: 1e-5
+  num_epochs: 100
+  early_stopping_patience: 15
+  lr_scheduler_patience: 10
+  lr_scheduler_factor: 0.5
+  
+  # Loss function
+  loss_type: "dice_bce"  # Options: "dice", "bce", "focal", "combined", "iou", "tversky", "boundary", "hausdorff"
+  dice_weight: 0.5
+  bce_weight: 0.5
+  focal_alpha: 0.25
+  focal_gamma: 2.0
+  
+  # Data augmentation
+  augmentation_probability: 0.8
+  rotation_range: [-30, 30]
+  scale_range: [0.8, 1.2]
+  brightness_range: [0.8, 1.2]
+  contrast_range: [0.8, 1.2]
+  horizontal_flip: true
+  vertical_flip: false
+
+training:
+  # Device and optimization
+  device: "auto"  # Options: "auto", "cpu", "cuda"
+  num_workers: 4
+  pin_memory: true
+  use_amp: true  # Automatic Mixed Precision
+  gradient_clipping: true
+  gradient_clip_value: 1.0
+  
+  # Logging and checkpointing
+  log_interval: 10
+  save_interval: 5
+  eval_interval: 1
+  tensorboard_logging: true
+  wandb_logging: false
+  wandb_project: "auto-optical-diagnostics"
+  save_best_only: true
+  save_last_checkpoint: true
+  max_checkpoints: 5
+  
+  # Validation
+  val_split: 0.2
+  cross_validation_folds: 5
+
+data:
+  # Data paths
+  train_images_dir: "data/synthetic/train/images"
+  train_masks_dir: "data/synthetic/train/masks"
+  val_images_dir: "data/synthetic/val/images"
+  val_masks_dir: "data/synthetic/val/masks"
+  
+  # Data processing
+  image_size: [512, 512]
+  normalization: "imagenet"  # Options: "imagenet", "minmax", "custom"
+  custom_mean: [0.485, 0.456, 0.406]
+  custom_std: [0.229, 0.224, 0.225]

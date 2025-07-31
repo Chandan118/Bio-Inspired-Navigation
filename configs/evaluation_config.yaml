@@ -1,0 +1,56 @@
+# Evaluation Configuration for AutoOpticalDiagnostics
+# This file configures the model evaluation process
+
+evaluation:
+  # Evaluation parameters
+  batch_size: 8
+  num_workers: 4
+  device: "auto"
+  threshold: 0.5
+  threshold_range: [0.1, 0.9]
+  threshold_steps: 50
+  
+  # Output settings
+  save_predictions: true
+  save_attention_maps: true
+  save_gradcam: true
+  num_visualization_samples: 20
+  
+  # Statistical analysis
+  confidence_intervals: [0.95, 0.99]
+  bootstrap_samples: 1000
+  
+  # Metrics to compute
+  metrics:
+    - "dice_score"
+    - "iou"
+    - "precision"
+    - "recall"
+    - "f1_score"
+    - "hausdorff_distance"
+    - "surface_dice"
+    - "psnr"
+    - "ssim"
+
+data:
+  # Data paths
+  val_images_dir: "data/synthetic/val/images"
+  val_masks_dir: "data/synthetic/val/masks"
+  
+  # Data processing
+  image_size: [512, 512]
+  normalization: "imagenet"
+
+output:
+  # Output directories
+  results_dir: "outputs/evaluation_results"
+  visualizations_dir: "outputs/visualizations"
+  reports_dir: "outputs/reports"
+  
+  # File formats
+  save_format: "png"  # Options: "png", "jpg", "pdf"
+  dpi: 300
+  
+  # Visualization settings
+  colormap: "viridis"  # Options: "viridis", "plasma", "inferno", "magma", "gray"
+  overlay_alpha: 0.7
