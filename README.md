@@ -12,7 +12,7 @@ Features
 - High-Quality Plot Generation: Automatically creates PNG files for Figure 13 (Localization Accuracy) and Figure 15B (Energy Consumption).
 - Structured Codebase: Organized as a proper Python package for clarity and maintainability.
 - Command-Line Interface: Provides flexible control over data and plot generation.
-- Clean Data Ouput: All data is saved in the standard, easy-to-use CSV format.
+- Clean Data Output: All data is saved in the standard, easy-to-use CSV format.
 
 How to Use
 
@@ -26,9 +26,8 @@ You must have Python 3 installed, along with the following libraries:
 
 You can install them via pip:
 pip install pandas numpy matplotlib seaborn
-"""
 
-# ...  actual Python code would go here ...
-# For example:
+# actual Python code would go here 
+# For example
 # import pandas as pd
-# print("Ready to generate data.")
+# print(Ready to generate data)
