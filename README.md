@@ -1,5 +1,4 @@
-"""
-Bio Inspired Navigation  Reproducible Data Generator (Data S1)
+Bio-Inspired Navigation  Reproducible Data Generator (Data S1)
 
 This project contains the complete codebase to reproducibly generate all datasets and key figures for the supplemental file `Data S1`.
 
