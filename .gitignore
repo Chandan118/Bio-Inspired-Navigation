@@ -137,4 +137,7 @@ plots/
 *.png
 *.jpg
 *.jpeg
-*.pdf 
+*.pdf
+ros2/build/
+ros2/install/
+ros2/log/

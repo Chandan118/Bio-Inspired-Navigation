@@ -23,7 +23,6 @@ setup(
     maintainer_email='chandan@example.com',
     description='ROS2 interface for the Bio-Inspired Navigation data generation toolkit.',
     license='MIT',
-    tests_require=['pytest'],
     entry_points={
         'console_scripts': [
             'data_generation_node = bio_nav_data_ros.data_generation_node:main',

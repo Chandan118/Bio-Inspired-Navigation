@@ -442,17 +442,20 @@ Python pipeline in a ROS2 node for real-time experimentation and visualization.
 
 ### Build & Launch
 
-1. Install the core Python package so the node can import the pipeline:
+1. Install ROS2 (Humble or newer) and ensure `colcon` is available.
+   - macOS/Linux: install ROS2 from the official instructions, then `pip install colcon-common-extensions` if needed.
+   - Source the ROS2 environment before building: `source /opt/ros/humble/setup.bash` (path may vary).
+2. Install the core Python package so the node can import the pipeline:
    ```bash
    pip install -e .
    ```
-2. Build the ROS2 workspace (Humble or newer) and source the overlay:
+3. Build the ROS2 workspace and source the overlay:
    ```bash
    cd ros2
    colcon build --packages-select bio_nav_data_ros
    source install/setup.bash
    ```
-3. Launch the node:
+4. Launch the node:
    ```bash
    ros2 launch bio_nav_data_ros bio_nav_data.launch.py
    ```
