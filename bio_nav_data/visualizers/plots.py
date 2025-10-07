@@ -1,12 +1,12 @@
-"""
-Visualization Module for Bio-Inspired Navigation Research
-
-This module provides high-quality plotting functions for generating publication-ready
-figures from the bio-inspired navigation research data.
-"""
+"""Visualization utilities for Bio-Inspired Navigation plots."""
 
 import logging
 from typing import Optional, Tuple
+
+import matplotlib
+
+# Force a non-interactive backend so CI/headless environments can render plots safely.
+matplotlib.use("Agg", force=True)
 
 import matplotlib.pyplot as plt
 import numpy as np
