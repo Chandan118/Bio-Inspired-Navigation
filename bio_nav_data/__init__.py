@@ -19,11 +19,11 @@ from .utils.config import Config
 from .visualizers.plots import plot_energy_consumption, plot_trajectory
 
 __all__ = [
-    'BioNavDataGenerator',
-    'TrajectoryDataGenerator',
-    'EnergyDataGenerator', 
-    'create_performance_summary',
-    'plot_trajectory',
-    'plot_energy_consumption',
-    'Config'
-] 
+    "BioNavDataGenerator",
+    "TrajectoryDataGenerator",
+    "EnergyDataGenerator",
+    "create_performance_summary",
+    "plot_trajectory",
+    "plot_energy_consumption",
+    "Config",
+]

@@ -67,14 +67,16 @@ def test_visualization_returns_figures() -> None:
     assert isinstance(fig_energy, Figure)
 
 
-@pytest.mark.parametrize("cli_args", [
-    [],
-    ["--config-only"],
-    ["--validate"],
-])
+@pytest.mark.parametrize(
+    "cli_args",
+    [
+        [],
+        ["--config-only"],
+        ["--validate"],
+    ],
+)
 def test_main_cli(tmp_path: Path, cli_args: List[str]) -> None:
     """Exercise the CLI entry point with common flags."""
-    import sys
     from subprocess import run
 
     cmd = [

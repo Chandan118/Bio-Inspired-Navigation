@@ -8,7 +8,6 @@ entry point and the ROS2 integration.
 
 from __future__ import annotations
 
-import logging
 import traceback
 from typing import Any, Dict, Optional
 
@@ -51,9 +50,7 @@ class BioNavDataGenerator:
         self.trajectory_generator = TrajectoryDataGenerator(
             **self.config.get_trajectory_params()
         )
-        self.energy_generator = EnergyDataGenerator(
-            **self.config.get_energy_params()
-        )
+        self.energy_generator = EnergyDataGenerator(**self.config.get_energy_params())
 
         # Setup plotting style
         setup_plotting_style()
@@ -84,9 +81,7 @@ class BioNavDataGenerator:
             performance_df = create_performance_summary()
 
             # Validate data quality
-            self._validate_generated_data(
-                trajectory_df, energy_df, performance_df
-            )
+            self._validate_generated_data(trajectory_df, energy_df, performance_df)
 
             self.logger.info("All data generated successfully")
 
@@ -123,9 +118,7 @@ class BioNavDataGenerator:
 
             # Save performance data
             performance_path = self.config.get_file_path("performance_data")
-            export_performance_report(
-                data["performance"], str(performance_path)
-            )
+            export_performance_report(data["performance"], str(performance_path))
             self.logger.info("Saved performance data to %s", performance_path)
 
         except Exception as exc:  # pragma: no cover - defensive logging
@@ -145,30 +138,20 @@ class BioNavDataGenerator:
         try:
             # Generate trajectory plot
             trajectory_plot_path = self.config.get_file_path("trajectory_plot")
-            plot_trajectory(
-                data["trajectory"], save_path=str(trajectory_plot_path)
-            )
-            self.logger.info(
-                "Generated trajectory plot: %s", trajectory_plot_path
-            )
+            plot_trajectory(data["trajectory"], save_path=str(trajectory_plot_path))
+            self.logger.info("Generated trajectory plot: %s", trajectory_plot_path)
 
             # Generate energy consumption plot
             energy_plot_path = self.config.get_file_path("energy_plot")
-            plot_energy_consumption(
-                data["energy"], save_path=str(energy_plot_path)
-            )
+            plot_energy_consumption(data["energy"], save_path=str(energy_plot_path))
             self.logger.info("Generated energy plot: %s", energy_plot_path)
 
             # Generate performance comparison plot
-            performance_plot_path = self.config.get_file_path(
-                "performance_plot"
-            )
+            performance_plot_path = self.config.get_file_path("performance_plot")
             plot_performance_comparison(
                 data["performance"], save_path=str(performance_plot_path)
             )
-            self.logger.info(
-                "Generated performance plot: %s", performance_plot_path
-            )
+            self.logger.info("Generated performance plot: %s", performance_plot_path)
 
             # Generate combined figure
             combined_plot_path = self.config.get_file_path("combined_plot")
@@ -177,9 +160,7 @@ class BioNavDataGenerator:
                 data["energy"],
                 save_path=str(combined_plot_path),
             )
-            self.logger.info(
-                "Generated combined plot: %s", combined_plot_path
-            )
+            self.logger.info("Generated combined plot: %s", combined_plot_path)
 
         except Exception as exc:  # pragma: no cover - defensive logging
             self.logger.error("Error generating plots: %s", exc)
@@ -239,9 +220,7 @@ class BioNavDataGenerator:
             f"{len(data['energy'])} trials across "
             f"{data['energy']['Method'].nunique()} methods"
         )
-        print(
-            f"  • Performance metrics: {len(data['performance'])} metrics"
-        )
+        print(f"  • Performance metrics: {len(data['performance'])} metrics")
 
         # Energy improvements
         energy_improvements = self.energy_generator.calculate_improvements(
