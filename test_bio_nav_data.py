@@ -1,179 +1,106 @@
 #!/usr/bin/env python3
-"""
-Simple test script for Bio-Inspired Navigation Data Generation Package
+"""Pytest suite for the Bio-Inspired Navigation Data toolkit."""
 
-This script provides basic tests to verify the package functionality.
-"""
+from __future__ import annotations
 
 import sys
-import os
 from pathlib import Path
+from typing import List
 
-# Add the current directory to the path
-sys.path.insert(0, str(Path(__file__).parent))
+import pytest
 
-def test_imports():
-    """Test that all modules can be imported."""
-    print("Testing imports...")
-    
-    try:
-        from bio_nav_data import BioNavDataGenerator, Config
-        from bio_nav_data.data_generators import TrajectoryDataGenerator, EnergyDataGenerator
-        from bio_nav_data.visualizers.plots import plot_trajectory, plot_energy_consumption
-        from bio_nav_data.utils.config import Config
-        from bio_nav_data.utils.logger import get_logger
-        print("✅ All imports successful")
-        return True
-    except ImportError as e:
-        print(f"❌ Import failed: {e}")
-        return False
+from bio_nav_data import BioNavDataGenerator, Config
+from bio_nav_data.data_generators import EnergyDataGenerator, TrajectoryDataGenerator
+from bio_nav_data.visualizers.plots import plot_energy_consumption, plot_trajectory
 
-def test_configuration():
-    """Test configuration functionality."""
-    print("Testing configuration...")
-    
-    try:
-        from bio_nav_data.utils.config import Config
-        
-        config = Config()
-        
-        # Test parameter updates
-        config.update_trajectory_params(n_points=200)
-        config.update_energy_params(n_trials=150)
-        
-        # Test validation
-        validation = config.validate_config()
-        
-        if all(validation.values()):
-            print("✅ Configuration test passed")
-            return True
-        else:
-            print(f"❌ Configuration validation failed: {validation}")
-            return False
-            
-    except Exception as e:
-        print(f"❌ Configuration test failed: {e}")
-        return False
+try:  # Optional import for type checking without hard dependency
+    from matplotlib.figure import Figure
+except ImportError:  # pragma: no cover - should not occur with requirements installed
+    Figure = type("FigureStub", (), {})  # type: ignore[misc, assignment]
 
-def test_data_generation():
-    """Test data generation functionality."""
-    print("Testing data generation...")
-    
-    try:
-        from bio_nav_data.data_generators import TrajectoryDataGenerator, EnergyDataGenerator
-        
-        # Test trajectory generation
-        traj_gen = TrajectoryDataGenerator(n_points=50)
-        trajectory_df = traj_gen.generate()
-        
-        if len(trajectory_df) == 50:
-            print("✅ Trajectory generation successful")
-        else:
-            print(f"❌ Trajectory generation failed: expected 50, got {len(trajectory_df)}")
-            return False
-        
-        # Test energy generation
-        energy_gen = EnergyDataGenerator(n_trials=20)
-        energy_df = energy_gen.generate()
-        
-        if len(energy_df) == 80:  # 4 methods * 20 trials
-            print("✅ Energy generation successful")
-        else:
-            print(f"❌ Energy generation failed: expected 80, got {len(energy_df)}")
-            return False
-        
-        return True
-        
-    except Exception as e:
-        print(f"❌ Data generation test failed: {e}")
-        return False
 
-def test_visualization():
-    """Test visualization functionality."""
-    print("Testing visualization...")
-    
-    try:
-        from bio_nav_data.visualizers.plots import plot_trajectory, plot_energy_consumption
-        from bio_nav_data.data_generators import TrajectoryDataGenerator, EnergyDataGenerator
-        
-        # Generate test data
-        traj_gen = TrajectoryDataGenerator(n_points=20)
-        trajectory_df = traj_gen.generate()
-        
-        energy_gen = EnergyDataGenerator(n_trials=10)
-        energy_df = energy_gen.generate()
-        
-        # Test plotting (without saving)
-        fig1 = plot_trajectory(trajectory_df)
-        fig2 = plot_energy_consumption(energy_df)
-        
-        print("✅ Visualization test passed")
-        return True
-        
-    except Exception as e:
-        print(f"❌ Visualization test failed: {e}")
-        return False
+@pytest.fixture()
+def temp_config(tmp_path: Path) -> Config:
+    """Provide a configuration rooted in a temporary directory."""
+    return Config(base_path=str(tmp_path))
 
-def test_main_pipeline():
-    """Test the main pipeline functionality."""
-    print("Testing main pipeline...")
-    
-    try:
-        from bio_nav_data import BioNavDataGenerator
-        
-        # Create a temporary output directory
-        import tempfile
-        with tempfile.TemporaryDirectory() as temp_dir:
-            # Initialize generator with temp directory
-            generator = BioNavDataGenerator()
-            
-            # Test data generation
-            data = generator.generate_all_data()
-            
-            if all(key in data for key in ['trajectory', 'energy', 'performance']):
-                print("✅ Main pipeline test passed")
-                return True
-            else:
-                print(f"❌ Main pipeline test failed: missing data keys")
-                return False
-                
-    except Exception as e:
-        print(f"❌ Main pipeline test failed: {e}")
-        return False
 
-def main():
-    """Run all tests."""
-    print("="*50)
-    print("BIO-NAV-DATA PACKAGE TESTS")
-    print("="*50)
-    
-    tests = [
-        test_imports,
-        test_configuration,
-        test_data_generation,
-        test_visualization,
-        test_main_pipeline
+def test_imports() -> None:
+    """Key classes and functions should be importable."""
+    assert BioNavDataGenerator is not None
+    assert Config is not None
+    assert TrajectoryDataGenerator is not None
+    assert EnergyDataGenerator is not None
+    assert plot_trajectory is not None
+    assert plot_energy_consumption is not None
+
+
+def test_configuration_validation(temp_config: Config) -> None:
+    """Configuration updates and validation should succeed."""
+    temp_config.update_trajectory_params(n_points=200)
+    temp_config.update_energy_params(n_trials=150)
+
+    validation = temp_config.validate_config()
+    assert all(validation.values()), f"Configuration validation failed: {validation}"
+
+
+def test_data_generation_shapes() -> None:
+    """Trajectory/Energy generators should honour requested sizes."""
+    traj_gen = TrajectoryDataGenerator(n_points=50)
+    trajectory_df = traj_gen.generate()
+    assert len(trajectory_df) == 50
+
+    energy_gen = EnergyDataGenerator(n_trials=20)
+    energy_df = energy_gen.generate()
+    assert len(energy_df) == 4 * 20  # four methods defined in generator
+
+
+def test_visualization_returns_figures() -> None:
+    """Plot helpers must return matplotlib Figure objects."""
+    traj_df = TrajectoryDataGenerator(n_points=20).generate()
+    energy_df = EnergyDataGenerator(n_trials=10).generate()
+
+    fig_traj = plot_trajectory(traj_df)
+    fig_energy = plot_energy_consumption(energy_df)
+
+    assert isinstance(fig_traj, Figure)
+    assert isinstance(fig_energy, Figure)
+
+
+@pytest.mark.parametrize("cli_args", [
+    [],
+    ["--config-only"],
+    ["--validate"],
+])
+def test_main_cli(tmp_path: Path, cli_args: List[str]) -> None:
+    """Exercise the CLI entry point with common flags."""
+    import sys
+    from subprocess import run
+
+    cmd = [
+        sys.executable,
+        str(Path.cwd() / "main.py"),
+        *cli_args,
+        "--output-dir",
+        str(tmp_path),
     ]
-    
-    passed = 0
-    total = len(tests)
-    
-    for test in tests:
-        print(f"\nRunning {test.__name__}...")
-        if test():
-            passed += 1
-        print()
-    
-    print("="*50)
-    print(f"TEST RESULTS: {passed}/{total} tests passed")
-    print("="*50)
-    
-    if passed == total:
-        print("🎉 All tests passed! Package is working correctly.")
-        return 0
-    else:
-        print("❌ Some tests failed. Please check the errors above.")
-        return 1
 
-if __name__ == "__main__":
-    sys.exit(main()) 
+    result = run(cmd, check=False)
+    assert result.returncode == 0, f"CLI exited with {result.returncode}"
+
+
+def test_pipeline_end_to_end(temp_config: Config, tmp_path: Path) -> None:
+    """Full pipeline should emit expected artifacts."""
+    generator = BioNavDataGenerator(temp_config)
+    data = generator.generate_all_data()
+
+    assert {"trajectory", "energy", "performance"}.issubset(data.keys())
+
+    generator.save_all_data(data)
+    generator.generate_all_plots(data)
+
+    outputs = list((tmp_path / "output").glob("*.csv"))
+    plots = list((tmp_path / "plots").glob("*.png"))
+
+    assert outputs, "Expected CSV outputs were not created"
+    assert plots, "Expected PNG plots were not created"
