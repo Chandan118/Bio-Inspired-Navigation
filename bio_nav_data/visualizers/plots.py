@@ -3,15 +3,13 @@
 import logging
 from typing import Optional, Tuple
 
-import matplotlib
-
-# Force a non-interactive backend so CI/headless environments can render plots safely.
-matplotlib.use("Agg", force=True)
-
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 import seaborn as sns
+
+# Force a non-interactive backend so CI/headless environments can render plots safely.
+plt.switch_backend("Agg")
 
 logger = logging.getLogger(__name__)
 
