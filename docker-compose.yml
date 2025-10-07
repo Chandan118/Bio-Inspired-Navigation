@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  bio_nav_data:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: bio-nav-data:latest
+    container_name: bio-nav-data
+    environment:
+      LOG_LEVEL: "${LOG_LEVEL:-INFO}"
+    command: ["--log-level", "${LOG_LEVEL:-INFO}"]
+    volumes:
+      - ./output:/app/output
+      - ./plots:/app/plots
+      - ./logs:/app/logs
+    restart: "no"

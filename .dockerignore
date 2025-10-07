@@ -1,0 +1,28 @@
+# Version control
+.git
+.gitignore
+
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+.pytest_cache/
+
+# Editor/IDE
+.vscode/
+.idea/
+
+# Runtime outputs
+output/
+plots/
+logs/
+
+# ROS2 build artifacts
+ros2/build/
+ros2/install/
+ros2/log/
+
+# Misc
+*.log
+*.tmp
