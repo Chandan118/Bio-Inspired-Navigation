@@ -24,8 +24,8 @@ COPY main.py ./main.py
 # Install package
 RUN pip install .
 
-# Create output directories to avoid permission issues at runtime
-RUN mkdir -p /app/output /app/plots /app/logs
+# Create runtime directories to avoid permission issues at runtime
+RUN mkdir -p /app/output /app/plots /app/logs /app/data
 
 VOLUME ["/app/output", "/app/plots", "/app/logs"]
 
