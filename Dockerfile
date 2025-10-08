@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM python:3.10-slim AS runtime
+FROM python:3.10-bullseye AS runtime
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
