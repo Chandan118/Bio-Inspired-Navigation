@@ -21,9 +21,6 @@ COPY setup.py README.md ./
 COPY bio_nav_data ./bio_nav_data
 COPY main.py ./main.py
 
-# Optional: include example data/configs if needed by the pipeline
-COPY data ./data
-
 # Install package
 RUN pip install .
 
