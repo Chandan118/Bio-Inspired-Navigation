@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>bio_nav_data_ros</name>
+  <version>0.1.0</version>
+  <description>ROS2 interface nodes for the Bio-Inspired Navigation data generation toolkit.</description>
+
+  <maintainer email="chandan@example.com">Chandan Sheikder</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_python</buildtool_depend>
+
+  <depend>rclpy</depend>
+  <depend>std_msgs</depend>
+  <depend>std_srvs</depend>
+  <depend>nav_msgs</depend>
+  <depend>geometry_msgs</depend>
+  <depend>builtin_interfaces</depend>
+
+  <exec_depend>python3-numpy</exec_depend>
+  <exec_depend>python3-pandas</exec_depend>
+
+  <export>
+    <build_type>ament_python</build_type>
+  </export>
+</package>
