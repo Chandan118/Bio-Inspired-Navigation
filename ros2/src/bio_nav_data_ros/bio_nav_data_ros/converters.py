@@ -44,16 +44,22 @@ def build_trajectory_paths(
 ) -> Dict[str, Path]:
     """Build path messages for all available trajectories."""
     return {
-        'ground_truth': _dataframe_to_path(df, 'ground_truth_x', 'ground_truth_y', frame_id, stamp),
-        'our_framework': _dataframe_to_path(df, 'our_framework_x', 'our_framework_y', frame_id, stamp),
-        'traditional_slam': _dataframe_to_path(df, 'traditional_slam_x', 'traditional_slam_y', frame_id, stamp),
+        "ground_truth": _dataframe_to_path(
+            df, "ground_truth_x", "ground_truth_y", frame_id, stamp
+        ),
+        "our_framework": _dataframe_to_path(
+            df, "our_framework_x", "our_framework_y", frame_id, stamp
+        ),
+        "traditional_slam": _dataframe_to_path(
+            df, "traditional_slam_x", "traditional_slam_y", frame_id, stamp
+        ),
     }
 
 
 def dataframe_to_json(df: pd.DataFrame) -> String:
     """Convert a dataframe to a JSON string ROS message."""
     msg = String()
-    records = df.to_dict(orient='records')
+    records = df.to_dict(orient="records")
     msg.data = json.dumps(records, default=float)
     return msg
 

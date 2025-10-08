@@ -3,5 +3,5 @@
 from .data_generation_node import BioNavDataRosNode
 
 __all__ = [
-    'BioNavDataRosNode',
+    "BioNavDataRosNode",
 ]
