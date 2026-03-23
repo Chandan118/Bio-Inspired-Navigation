@@ -1,9 +1,14 @@
 """
-Core pipeline orchestration for bio-inspired navigation data generation.
+pipeline.py
 
-This module exposes the high-level ``BioNavDataGenerator`` class that coordinates
-data generation, persistence, and visualization. It is reused by both the CLI
-entry point and the ROS2 integration.
+Author      : Chandan Sheikder
+Email       : chandan@bit.edu.cn
+Phone       : +8618222390506
+Affiliation : Beijing Institute of Technology (BIT)
+Date        : 2026-03-23
+
+Description:
+    Core pipeline orchestration for bio-inspired navigation data generation.
 """
 
 from __future__ import annotations

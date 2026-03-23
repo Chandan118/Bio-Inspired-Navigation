@@ -1,8 +1,14 @@
 """
-Configuration Management for Bio-Inspired Navigation Research
+config.py
 
-This module provides centralized configuration management for the project,
-including paths, parameters, and settings.
+Author      : Chandan Sheikder
+Email       : chandan@bit.edu.cn
+Phone       : +8618222390506
+Affiliation : Beijing Institute of Technology (BIT)
+Date        : 2026-03-23
+
+Description:
+    Configuration Management for Bio-Inspired Navigation Research
 """
 
 import os

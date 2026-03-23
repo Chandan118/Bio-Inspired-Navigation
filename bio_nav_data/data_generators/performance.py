@@ -1,8 +1,14 @@
 """
-Performance Data Generator for Bio-Inspired Navigation Research
+performance.py
 
-This module creates performance summary data that matches the metrics presented
-in the research paper, providing a structured comparison between different methods.
+Author      : Chandan Sheikder
+Email       : chandan@bit.edu.cn
+Phone       : +8618222390506
+Affiliation : Beijing Institute of Technology (BIT)
+Date        : 2026-03-23
+
+Description:
+    Performance Data Generator for Bio-Inspired Navigation Research
 """
 
 import logging

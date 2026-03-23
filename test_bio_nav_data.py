@@ -1,5 +1,16 @@
 #!/usr/bin/env python3
-"""Pytest suite for the Bio-Inspired Navigation Data toolkit."""
+"""
+test_bio_nav_data.py
+
+Author      : Chandan Sheikder
+Email       : chandan@bit.edu.cn
+Phone       : +8618222390506
+Affiliation : Beijing Institute of Technology (BIT)
+Date        : 2026-03-23
+
+Description:
+    Pytest suite for the Bio-Inspired Navigation Data toolkit.
+"""
 
 from __future__ import annotations
 

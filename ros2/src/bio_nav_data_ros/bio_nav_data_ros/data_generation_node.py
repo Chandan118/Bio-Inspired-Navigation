@@ -1,4 +1,15 @@
-"""ROS2 node that wraps the BioNavData pipeline and publishes results."""
+"""
+data_generation_node.py
+
+Author      : Chandan Sheikder
+Email       : chandan@bit.edu.cn
+Phone       : +8618222390506
+Affiliation : Beijing Institute of Technology (BIT)
+Date        : 2026-03-23
+
+Description:
+    ROS2 node that wraps the BioNavData pipeline and publishes results.
+"""
 
 from __future__ import annotations
 

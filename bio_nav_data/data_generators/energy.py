@@ -1,8 +1,14 @@
 """
-Energy Data Generator for Bio-Inspired Navigation Research
+energy.py
 
-This module generates simulated energy consumption data for different navigation methods,
-providing realistic distributions that match the performance claims in the research.
+Author      : Chandan Sheikder
+Email       : chandan@bit.edu.cn
+Phone       : +8618222390506
+Affiliation : Beijing Institute of Technology (BIT)
+Date        : 2026-03-23
+
+Description:
+    Energy Data Generator for Bio-Inspired Navigation Research
 """
 
 import logging
