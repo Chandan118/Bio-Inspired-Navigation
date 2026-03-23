@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using the metadata below."
+type: software
+title: "Bio-Inspired Navigation Data Generation"
+version: "1.0.0"
+date-released: "2025-03-23"
+doi: "10.5281/zenodo.19097072"
+abstract: >-
+  A production-ready Python package for generating, visualizing, and analyzing bio-inspired navigation research data, with optional ROS 2 integration.
+license: MIT
+authors:
+  - family-names: Sheikder
+    given-names: Chandan
+    email: chandan@bit.edu.cn
+    affiliation: "Beijing Institute of Technology (BIT)"
+    orcid: "https://orcid.org/0000-0003-1459-8747"
+repository-code: "https://github.com/Chandan118/Bio-Inspired-Navigation"
+keywords:
+  - "bio-inspired navigation"
+  - "swarm robotics"
+  - "autonomous navigation"
+  - "ROS 2"
+  - "sensor fusion"
+contact:
+  - name: Chandan Sheikder
+    email: chandan@bit.edu.cn
+    website: "https://chandan118.github.io"
