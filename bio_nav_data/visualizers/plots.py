@@ -1,4 +1,15 @@
-"""Visualization utilities for Bio-Inspired Navigation plots."""
+"""
+plots.py
+
+Author      : Chandan Sheikder
+Email       : chandan@bit.edu.cn
+Phone       : +8618222390506
+Affiliation : Beijing Institute of Technology (BIT)
+Date        : 2026-03-23
+
+Description:
+    Visualization utilities for Bio-Inspired Navigation plots.
+"""
 
 import logging
 from typing import Optional, Tuple

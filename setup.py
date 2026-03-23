@@ -1,8 +1,15 @@
 #!/usr/bin/env python3
 """
-Setup script for Bio-Inspired Navigation Data Generation Package
+setup.py
 
-This script provides installation configuration for the bio_nav_data package.
+Author      : Chandan Sheikder
+Email       : chandan@bit.edu.cn
+Phone       : +8618222390506
+Affiliation : Beijing Institute of Technology (BIT)
+Date        : 2026-03-23
+
+Description:
+    Setup script for Bio-Inspired Navigation Data Generation Package
 """
 
 from setuptools import setup, find_packages

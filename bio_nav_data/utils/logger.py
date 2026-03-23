@@ -1,8 +1,14 @@
 """
-Logging Configuration for Bio-Inspired Navigation Research
+logger.py
 
-This module provides centralized logging configuration for the project,
-ensuring consistent logging across all modules.
+Author      : Chandan Sheikder
+Email       : chandan@bit.edu.cn
+Phone       : +8618222390506
+Affiliation : Beijing Institute of Technology (BIT)
+Date        : 2026-03-23
+
+Description:
+    Logging Configuration for Bio-Inspired Navigation Research
 """
 
 import datetime

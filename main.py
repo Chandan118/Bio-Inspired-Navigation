@@ -1,13 +1,15 @@
 #!/usr/bin/env python3
 """
-Bio-Inspired Navigation Data Generation - Main Application
+main.py
 
-This script provides a complete, production-ready implementation for generating
-bio-inspired navigation research data and visualizations.
+Author      : Chandan Sheikder
+Email       : chandan@bit.edu.cn
+Phone       : +8618222390506
+Affiliation : Beijing Institute of Technology (BIT)
+Date        : 2026-03-23
 
-Author: Research Team
-Version: 2.0.0
-License: MIT
+Description:
+    Bio-Inspired Navigation Data Generation - Main Application
 """
 
 import argparse

@@ -1,11 +1,14 @@
 """
-Bio-Inspired Navigation Data Generation Package
+__init__.py
 
-This package provides tools for generating and visualizing bio-inspired navigation data
-for research and analysis purposes.
+Author      : Chandan Sheikder
+Email       : chandan@bit.edu.cn
+Phone       : +8618222390506
+Affiliation : Beijing Institute of Technology (BIT)
+Date        : 2026-03-23
 
-Author: Research Team
-Version: 2.0.0
+Description:
+    Bio-Inspired Navigation Data Generation Package
 """
 
 __version__ = "2.0.0"

@@ -1,9 +1,14 @@
 """
-Trajectory Data Generator for Bio-Inspired Navigation Research
+trajectory.py
 
-This module generates sophisticated trajectory data that simulates different navigation
-methods including ground truth, traditional SLAM with drift, and our proposed framework
-with periodic error correction.
+Author      : Chandan Sheikder
+Email       : chandan@bit.edu.cn
+Phone       : +8618222390506
+Affiliation : Beijing Institute of Technology (BIT)
+Date        : 2026-03-23
+
+Description:
+    Trajectory Data Generator for Bio-Inspired Navigation Research
 """
 
 import logging
